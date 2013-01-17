@@ -1,10 +1,15 @@
 console.log('This would be the main JS file.');
 function onLinkedInLoad() {
      IN.Event.on(IN, "auth", onLinkedInAuth);
+     IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
 }
 
 function onLinkedInAuth() {
      IN.API.Profile("me").result(displayProfiles);
+}
+
+function onLinkedInLogout() {
+  setLoginBadge(false);
 }
 
 function displayProfiles(profiles) {
