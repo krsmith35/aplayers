@@ -1,36 +1,39 @@
-console.log('This would be the main JS file.');
-function onLinkedInLoad() {
-     IN.Event.on(IN, "auth", onLinkedInAuth);
-     IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
-}
 
-function onLinkedInAuth() {
-     IN.API.Profile("me").result(displayProfiles);
+function onLinkedInLoad() {
+  IN.Event.on(IN, "auth", function() {onLinkedInLogin();});
+  IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
 }
 
 function onLinkedInLogout() {
   setLoginBadge(false);
 }
 
-function displayProfiles(profiles) {
-     member = profiles.values[0];
-     document.getElementById("profiles").innerHTML = 
-          "<p id=\"" + member.id + "\">Hello " +  member.firstName + " " + member.lastName + "</p>";
-}
-
-/* Sample code from a tutorial about how to post profile data to html
-function loadData() {
+function onLinkedInLogin() {
+  // we pass field selectors as a single parameter (array of strings)
   IN.API.Profile("me")
-    .fields(["id", "firstName", "lastName", "pictureUrl","headline","publicProfileUrl"])
+    .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl"])
     .result(function(result) {
-      profile = result.values[0];
-      profHTML = "<p><a href=\"" + profile.publicProfileUrl + "\">";
-      profHTML += "<img class=img_border align=\"left\" src=\"" + profile.pictureUrl + "\"></a>";      
-      profHTML += "<a href=\"" + profile.publicProfileUrl + "\">";
-      profHTML += "<h2 class=myname>" + profile.firstName + " " + profile.lastName + "</a> </h2>";
-      profHTML += "<span class=myheadline>" + profile.headline + "</span>";
-      $("#profile").html(profHTML);
+      setLoginBadge(result.values[0]);
+    })
+    .error(function(err) {
+      alert(err);
     });
 }
-*/
+
+function setLoginBadge(profile) {
+  if (!profile) {
+    profHTML = "<p>You are not logged in</p>";
+  }
+  else {
+    var pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
+    profHTML = "<p><a href=\"" + profile.publicProfileUrl + "\">";
+    profHTML = profHTML + "<img align=\"baseline\" src=\"" + pictureUrl + "\"></a>";      
+    profHTML = profHTML + "&nbsp; Welcome <a href=\"" + profile.publicProfileUrl + "\">";
+    profHTML = profHTML + profile.firstName + " " + profile.lastName + "</a>! <a href=\"#\" onclick=\"IN.User.logout(); return false;\">logout</a></p>";
+  }
+  document.getElementById("loginbadge").innerHTML = profHTML;
+}
+
+
+
 
