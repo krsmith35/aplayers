@@ -1,4 +1,3 @@
-
 function onLinkedInLoad() {
   IN.Event.on(IN, "auth", function() {onLinkedInLogin();});
   IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
@@ -11,7 +10,7 @@ function onLinkedInLogout() {
 function onLinkedInLogin() {
   // we pass field selectors as a single parameter (array of strings)
   IN.API.Profile("me")
-    .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl"])
+    .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl", "emailAddress"])
     .result(function(result) {
       setLoginBadge(result.values[0]);
     })
@@ -30,6 +29,7 @@ function setLoginBadge(profile) {
     profHTML = profHTML + "<img align=\"baseline\" src=\"" + pictureUrl + "\"></a>";      
     profHTML = profHTML + "&nbsp; Welcome <a href=\"" + profile.publicProfileUrl + "\">";
     profHTML = profHTML + profile.firstName + " " + profile.lastName + "</a>! <a href=\"#\" onclick=\"IN.User.logout(); return false;\">logout</a></p>";
+    profHTML += " Email: " + profile.emailAddress;
   }
   document.getElementById("loginbadge").innerHTML = profHTML;
 }
