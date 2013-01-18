@@ -32,7 +32,7 @@ time, mark, audio, video {
 
 #bottom{
 	position:absolute; 
-	bottom:0;
+	bottom:-200px;
 }
 
 
