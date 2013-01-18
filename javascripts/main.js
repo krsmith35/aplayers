@@ -17,6 +17,10 @@ function onLinkedInLogin() {
     .error(function(err) {
       alert(err);
     });
+  
+  //firebase script to store user values
+  var user = new Firebase('https://a-players.firebaseio.com/');
+  user.push({firstName: profile.firstName})
 }
 
 function setLoginBadge(profile) {
