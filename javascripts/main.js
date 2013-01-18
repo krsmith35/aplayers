@@ -21,7 +21,7 @@ function onLinkedInLogin() {
 
 function setLoginBadge(profile) {
   if (!profile) {
-    profHTML = <script type="in/Login"></script>;
+    profHTML = "You are not logged in.";
   }
   else {
     var pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
