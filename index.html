@@ -44,7 +44,12 @@
           <br>
           
           <input type='text' id='nameInput' placeholder='Name'>
+          
           <script>
+            var myDataReference = new Firebase('https://kellysmith.firebaseio.com/');
+            myDataReference.set('I am now writing data into Firebase!');
+          
+          
             var testFire = new Firebase("https://a-players.firebaseio.com/")
               $('#messageInput').keypress(function (e) {
                 if (e.keyCode == 13) {
