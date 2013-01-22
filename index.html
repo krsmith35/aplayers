@@ -43,6 +43,16 @@
           <p>Sign up or log in to join the experiment!</p>
           <br>
           
+          <input type='text' id='nameInput' placeholder='Name'>
+          <script>
+            var testFire = new Firebase("https://a-players.firebaseio.com/")
+              $('#messageInput').keypress(function (e) {
+                if (e.keyCode == 13) {
+                var name = $('#nameInput').val();
+                messagesRef.push({name:name});
+                }
+              });
+          </script>
           <div id="loginbadge">
      
           </div>
