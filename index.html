@@ -48,7 +48,12 @@
           <script>
             var myDataReference = new Firebase('https://kellysmith.firebaseio.com/');
             myDataReference.set('I am now writing data into Firebase!');
-          
+              $('#messageInput').keypress(function (e) {
+                if (e.keyCode == 13) {
+                var name = $('#nameInput').val();
+                myDataReference.push({name:name});
+                }
+              });
           
             var testFire = new Firebase("https://a-players.firebaseio.com/")
               $('#messageInput').keypress(function (e) {
