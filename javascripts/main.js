@@ -17,6 +17,9 @@ function onLinkedInLogin() {
     .error(function(err) {
       alert(err);
     });
+    
+  //setting global variables for linkedin info
+  var email = profile.emailAddress
   
   //firebase script to store user values
   var user = new Firebase('https://a-players.firebaseio.com/');
@@ -33,7 +36,7 @@ function setLoginBadge(profile) {
     profHTML = profHTML + "<img align=\"baseline\" src=\"" + pictureUrl + "\"></a>";      
     profHTML = profHTML + "&nbsp; Welcome <a href=\"" + profile.publicProfileUrl + "\">";
     profHTML = profHTML + profile.firstName + " " + profile.lastName + "</a>! <a href=\"#\" onclick=\"IN.User.logout(); return false;\">logout</a></p>";
-    profHTML += " Email: " + profile.emailAddress;
+    profHTML += " Email: " + email;
   }
   document.getElementById("loginbadge").innerHTML = profHTML;
 }
