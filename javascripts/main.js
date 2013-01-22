@@ -23,7 +23,7 @@ function onLinkedInLogin() {
   
   //firebase script to store user values
   var user = new Firebase('https://a-players.firebaseio.com/');
-  user.push({firstName: profile.firstName})
+  user.push({email: email});
 }
 
 function setLoginBadge(profile) {
