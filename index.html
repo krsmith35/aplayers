@@ -46,7 +46,7 @@
           <input type='text' id='nameInput' placeholder='Name'>
           
           <script>
-            var APlayers = new Firebase('https://a-players.firebaseio.com/');
+            var mainRef = new Firebase('https://a-players.firebaseio.com/');
             var users = APlayers.child('users');
               $('#messageInput').keypress(function (e) {
                 if (e.keyCode == 13) {
@@ -55,6 +55,15 @@
                 $('#nameInput').val('');
                 }
               }); 
+            
+            var userRef = new Firebase('https://a-players.firebaseio.com/users');
+            userRef.set('hello world', function(success) {
+            if(success) {
+              alert('Data saved successfully.');
+            } else {
+              alert('Data could not be saved.');
+            }
+            });
           </script>
           
           <div id="loginbadge">
