@@ -50,7 +50,9 @@
             
             function testFirebase(){
               var mainRef = new Firebase('https://a-players.firebaseio.com/');
-              mainRef.set("Hello Firebase")
+              mainRef.set("Hello Firebase");
+              var userRef = mainRef.child("users");
+              userRef.set("Henry");
             }
             
             var users = APlayers.child('users');
