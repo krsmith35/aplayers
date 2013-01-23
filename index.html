@@ -44,9 +44,15 @@
           <br>
           
           <input type='text' id='nameInput' placeholder='Name'>
+          <input type='button' onclick="testFirebase()">Push</button>
           
           <script>
-            var mainRef = new Firebase('https://a-players.firebaseio.com/');
+            
+            function testFirebase(){
+              var mainRef = new Firebase('https://a-players.firebaseio.com/');
+              mainRef.set("Hello Firebase")
+            }
+            
             var users = APlayers.child('users');
               $('#messageInput').keypress(function (e) {
                 if (e.keyCode == 13) {
