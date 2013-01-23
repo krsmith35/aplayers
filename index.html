@@ -46,25 +46,17 @@
           <input type='text' id='nameInput' placeholder='Name'>
           
           <script>
-            var myDataReference = new Firebase('https://a-players.firebaseio.com/');
-            myDataReference.set('I am now writing data into Firebase!');
+            var APlayers = new Firebase('https://a-players.firebaseio.com/');
+            var users = APlayers.child('users');
               $('#messageInput').keypress(function (e) {
                 if (e.keyCode == 13) {
-                myDataReference.name = $('#nameInput').val();
                 var name = $('#nameInput').val();
-                myDataReference.push({name:name});
+                users.push({name:name});
                 $('#nameInput').val('');
                 }
-              });
-          
-            var testFire = new Firebase("https://a-players.firebaseio.com/")
-              $('#messageInput').keypress(function (e) {
-                if (e.keyCode == 13) {
-                var name = $('#nameInput').val();
-                messagesRef.push({name:name});
-                }
-              });
+              }); 
           </script>
+          
           <div id="loginbadge">
      
           </div>
