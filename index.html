@@ -52,7 +52,13 @@
               var mainRef = new Firebase('https://a-players.firebaseio.com/');
               mainRef.set("Hello Firebase");
               var userRef = mainRef.child("users");
-              userRef.set("Henry");
+              userRef.set("Henry", function(success) {
+                if(success) {
+                  alert('Data saved successfully.');
+                } else {
+                  alert('Data could not be saved.');
+                }
+                });
             }
             
             var users = APlayers.child('users');
@@ -64,14 +70,7 @@
                 }
               }); 
             
-            var userRef = new Firebase('https://a-players.firebaseio.com/users');
-            userRef.set('hello world', function(success) {
-            if(success) {
-              alert('Data saved successfully.');
-            } else {
-              alert('Data could not be saved.');
-            }
-            });
+
           </script>
           
           <div id="loginbadge">
