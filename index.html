@@ -34,6 +34,12 @@
     </header>
 
     <div id="content-wrapper">
+          <span id="login"
+           <script type="IN/Login" data-onAuth="[onAuthCallback]" data-onLogout="[onLogoutCallback]">
+             Logged in as: <?js= firstName ?> <?js= lastName ?>
+            </script>
+          </span>
+    
       <div class="inner clearfix">
         <section id="main-content">
         
@@ -61,20 +67,16 @@
                 });
             }
             
-            var users = APlayers.child('users');
-              $('#messageInput').keypress(function (e) {
-                if (e.keyCode == 13) {
-                var name = $('#nameInput').val();
-                users.push({name:name});
-                $('#nameInput').val('');
-                }
-              }); 
+            function onLinkedInLoad(){
+              
+            }
             
-
           </script>
           
+
+              
           <div id="loginbadge">
-     
+            
           </div>
           
           
