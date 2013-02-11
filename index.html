@@ -34,16 +34,17 @@
     </header>
 
     <div id="content-wrapper">
+          
+          <!--
           <span id="login">
            <script type="IN/Login" data-onAuth="[onAuthCallback]" data-onLogout="[onLogoutCallback]">
              Logged in as: <?js= firstName ?> <?js= lastName ?>
             </script>
           </span>
+          -->
     
       <div class="inner clearfix">
         <section id="main-content">
-        
-          <h2>This is an awesome page.</h2>
         
           <p>A-Players are the best of the best in the professional world. The rockstars who turn everything they touch to gold. 
           We all know a few, but everyone wants more of them on their teams and working on their projects.
@@ -53,6 +54,45 @@
           
           <input type='text' id='nameInput' placeholder='Name'>
           <input type='button' onclick="testFirebase()">Push</button>
+          
+          <script type="text/javascript">
+            function onLinkedInLoad() {
+              IN.Event.on(IN, "auth", function() {onLinkedInLogin();});
+              IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
+            }
+            
+            function onLinkedInLogout() {
+              setConnections({}, {total:0});
+            }
+            
+            function onLinkedInLogin() {
+              // here, we pass the fields as individual string parameters
+              IN.API.Connections("me")
+                .fields("id", "firstName", "lastName", "pictureUrl")
+                .result(function(result, metadata) {
+                  setConnections(result.values, metadata);
+                });
+            }
+            
+            function setConnections(connections) {
+              var connHTML = "<ul>";
+              for (id in connections) {
+                connHTML = connHTML + "<li>";
+                
+                /* picture url not always there, must be defensive */
+                if (connections[id].hasOwnProperty('pictureUrl')) {
+                  connHTML = connHTML + "<img align=\"baseline\" src=\"" + connections[id].pictureUrl + "\>";
+                }  else {
+                  connHTML = connHTML + "<img align=\"baseline\" src=\"http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png\">";
+                }
+                
+                connHTML = connHTML + "&nbsp;" + connections[id].firstName + " " + connections[id].lastName + "</li>";
+              }
+            
+              connHTML = connHTML + "</ul>";
+              document.getElementById("connectionsdata").innerHTML = connHTML;
+            }
+          </script>
           
           <script>
             
