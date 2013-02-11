@@ -52,8 +52,7 @@
           <p>Sign up or log in to join the experiment!</p>
           <br>
           
-          <input type='text' id='nameInput' placeholder='Name'>
-          <input type='button' onclick="testFirebase()">Push</button>
+          <div id="connections"></div>
           
           <script type="text/javascript">
             function onLinkedInLoad() {
@@ -90,7 +89,7 @@
               }
             
               connHTML = connHTML + "</ul>";
-              document.getElementById("connectionsdata").innerHTML = connHTML;
+              document.getElementById("connections").innerHTML = connHTML;
             }
           </script>
           
